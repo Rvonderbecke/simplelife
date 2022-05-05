@@ -1,0 +1,177 @@
+//<div className='screenCover'>
+//<div className='signup-container'>
+//<h1 className='signup-container-h1'>Sign up with email.</h1>
+//<p className='signup-container-p'></p>
+//<input className='signup-container-form-name'>Display Name</input>
+//<input className='signup-container-form-email'>Email</input>
+//<input className='signup-container-form-streetNum'>Street Number</input>
+//<input className='signup-container-form-streetName'>Street Name</input>
+//<input className='signup-container-form-zip'>Zipcode</input>
+//<input className='signup-container-form-password'>Password</input>
+//<input className='signup-container-form-confPassword'>Confirm Password</input>
+//<button className='signup-container-form-btn' type='submit'>Submit</button>
+
+.screenCover {
+    background-color: rgba(0, 0, 0, 0.908);
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.signup-container{
+    margin: 8rem 0 0 16rem;  
+    background-color: $color-primary-light;
+    width: 70%;
+    border-radius: 2rem;
+    box-shadow: 0 .5rem .7rem ($color-black);
+
+    font-family: $font-paragraph;
+    
+
+
+
+    &-h1 {
+        font-family: $font-heading;
+        color: $color-white;
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    &-p {
+        color: $color-white;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+}
+
+.signup-container-form {
+        
+        margin: 0 5rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr 2fr 8fr;
+        grid-template-rows: 1fr repeat(7, 1fr);
+        row-gap: 2.5rem;
+        column-gap: 2.5rem;
+
+        font-family:$font-paragraph;
+   
+    &-name {
+    grid-column: 1 / span 4;
+    height: 2.5rem;
+    border-radius: .8rem;
+    border: none;
+    font-family:$font-paragraph;
+    padding-left: 1.5rem;      
+    }
+
+    &-streetNum {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: 1.5rem;
+
+        grid-column: 1 / span 2;
+    }
+    
+    &-streetName {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: 1.5rem;
+
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+    
+    &-apt {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: 1.5rem;
+
+        grid-column: 1 / span 2;
+    }
+    &-email {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: 1.5rem;
+
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+    &-city {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        background-color: $color-grey-medium;
+        padding-left: 1.5rem;
+
+        grid-column: 1 / span 2;
+    }
+
+    &-confEmail {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: 1.5rem;
+
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+    &-state {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: .8rem;
+        background-color: $color-grey-medium;
+
+        grid-column: 1;
+    }
+
+    &-zip {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: 1.5rem;
+    }
+
+    &-password {
+        border-radius: .8rem;
+        border: none;
+        font-family:$font-paragraph;
+        padding-left: 1.5rem;
+
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+&-phone {
+    border-radius: .8rem;
+    border: none;
+    font-family:$font-paragraph;
+    padding-left: 1.5rem;
+
+    grid-column: 1 / span 2;
+}
+
+    &-confPassword{ 
+        border-radius: .8rem;
+        border: none;
+        font-family: $font-paragraph;
+        padding-left: 1.5rem;
+
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+    &-btn {
+        grid-column-start: 3;
+        margin-left: 5rem;      
+        
+    }
+
+}

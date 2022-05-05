@@ -5,19 +5,20 @@ import {
 	GoogleAuthProvider,
 	signOut,
 	sendPasswordResetEmail,
+	createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 //import {  getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyA9NzPeLs7g8xWo17DNHWU7rKX_mWNGrqI',
-	authDomain: 'simple-life-app.firebaseapp.com',
-	projectId: 'simple-life-app',
-	storageBucket: 'simple-life-app.appspot.com',
-	messagingSenderId: '1034500165332',
-	appId: '1:1034500165332:web:e31e7b573e8d72b2267541',
-	measurementId: 'G-MDBPHP7M3T',
+	apiKey: 'AIzaSyBF3n-wzeN6nWSywuHS-xB4GBdNWx9j2gQ',
+	authDomain: 'simplelife-f7d32.firebaseapp.com',
+	projectId: 'simplelife-f7d32',
+	storageBucket: 'simplelife-f7d32.appspot.com',
+	messagingSenderId: '742509609988',
+	appId: '1:742509609988:web:fc2fca1f401eea57c6e151',
+	measurementId: 'G-53LGBJCKKF',
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -33,9 +34,9 @@ export const logUserOut = () => signOut(auth);
 export const db = getFirestore();
 //set single data value maybe??
 //db.collection('users').doc(user_id).set({foo:'bar'}, {merge: true})
-export const createAuthUserDoc = async (userAuth) => {
+export const createAuthUserDoc = async (userAuth, additionalInfo) => {
+	if (!userAuth) return console.log('err');
 	const userDocRef = doc(db, 'users', userAuth.uid);
-	console.log(userDocRef);
 
 	const userSnapShot = getDoc(userDocRef);
 	if (userSnapShot) {
@@ -48,16 +49,9 @@ export const createAuthUserDoc = async (userAuth) => {
 			await setDoc(
 				userDocRef,
 				{
-					name: displayName,
+					displayName,
 					email,
 					createAt,
-					address: [
-						{
-							streetNumber: 132,
-							streetName: '',
-							zipCode: 51005,
-						},
-					],
 					bills: {
 						essentialBills: [
 							{
@@ -142,11 +136,12 @@ export const createAuthUserDoc = async (userAuth) => {
 							},
 						],
 					},
+					...additionalInfo,
 				},
 				{ merge: true }
 			);
 		} catch (err) {
-			console.log(err.message);
+			console.log(err.code);
 		}
 	}
 	return userDocRef;
@@ -155,4 +150,10 @@ export const createAuthUserDoc = async (userAuth) => {
 //password stuff
 export const resetUserPassword = ({ email }) => {
 	sendPasswordResetEmail(auth, email);
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+	if (!email || !password) return;
+	const { user } = await createUserWithEmailAndPassword(auth, email, password);
+	return user;
 };
