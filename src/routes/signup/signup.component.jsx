@@ -1,8 +1,11 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
-import { createAuthUserWithEmailAndPassword, createAuthUserDoc } from '../../utils/fireBase';
-
+import {
+	createAuthUserWithEmailAndPassword,
+	createAuthUserDoc,
+} from '../../utils/fireBase';
+import FormInput from '../../components/form-input.component';
 const defaultFromFields = {
 	displayName: '',
 	email: '',
@@ -16,10 +19,15 @@ const defaultFromFields = {
 const SignUpForm = () => {
 	const { setCurrentUser } = useContext(UserContext);
 	const [formFields, setFormFields] = useState(defaultFromFields);
+	const resetFormFields = () => {
+		setFormFields(defaultFromFields);
+	};
+
 	const nav = useNavigate();
 	const {
 		displayName,
 		email,
+		confEmail,
 		zipCode,
 		phone,
 		streetName,
@@ -30,15 +38,15 @@ const SignUpForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const { email, password} = formFields;
+		const { email, password } = formFields;
 		try {
-			const  user  = await createAuthUserWithEmailAndPassword(email, password);
+			const user = await createAuthUserWithEmailAndPassword(email, password);
 			setCurrentUser(user);
-			createAuthUserDoc(user, formFields);
+			await createAuthUserDoc(user, formFields);
+			resetFormFields();
 			nav('/dashboard');
-
 		} catch (err) {
-			console.log(err.message)
+			console.log(err.message);
 		}
 	};
 
@@ -46,113 +54,88 @@ const SignUpForm = () => {
 		const { name, value } = e.target;
 		setFormFields({ ...formFields, [name]: value });
 		// still need to find last entry console.log(formFields)
-	}
+	};
+	const handleOnClick = () => {
+		nav(-1);
+	};
 	return (
 		<div className='screenCover'>
 			<div className='signup-container'>
 				<h1 className='signup-container-h1'>Register</h1>
+				<button type='button' onClick={handleOnClick}>
+					X
+				</button>
 				<p className='signup-container-p'>Welcome to the Simple Life</p>
 				<form className='signup-container-form' onSubmit={handleSubmit}>
-					<input
-						className='signup-container-form-name'
+					<FormInput
+						label='Display Name'
 						type='text'
 						required
 						onChange={onChangeHandler}
 						name='displayName'
 						value={displayName}
-						placeholder='Display Name*'
 					/>
 
-
-					<input
-						className='signup-container-form-streetNum'
+					<FormInput
+						label='Number'
 						type='text'
 						required
 						onChange={onChangeHandler}
 						name='streetNumber'
 						value={streetNumber}
-						placeholder='Street Number*'
 					/>
 
-					<input
-						className='signup-container-form-streetName'
+					<FormInput
+						label='Street Name'
 						type='text'
 						required
 						onChange={onChangeHandler}
 						name='streetName'
 						value={streetName}
-						placeholder='Street Name*'
 					/>
-					<input
-						className='signup-container-form-apt'
-						type='text'
-						name='apt'
-						placeholder='Apt./Ste.'
-					/>
-					<input
-						className='signup-container-form-email'
+					<FormInput label='Apt' type='text' name='apt' />
+					<FormInput
+						label='Email'
 						type='email'
 						required
 						onChange={onChangeHandler}
 						name='email'
 						value={email}
-						placeholder='Email Address*'
-					/>
-					<input
-						className='signup-container-form-city'
-						type='text'
-						name='city'
-						placeholder='City'
 					/>
 
-					<input
-						className='signup-container-form-confEmail'
-						type='email'
-						name='confEmail'
-						placeholder='Confirm Email Address*'
-					/>
-					<input
-						className='signup-container-form-state'
-						type='text'
-						name='state'
-						placeholder='State'
-					/>
-					<input
-						className='signup-container-form-zip'
+					<FormInput label='Confirm Email' type='email' name='confEmail' value={confEmail} />
+					<FormInput
+						label='ZipCode'
 						type='text'
 						required
 						onChange={onChangeHandler}
 						name='zipCode'
 						value={zipCode}
-						placeholder='Zip Code*'
 					/>
 
-					<input
-						className='signup-container-form-password'
+					<FormInput
+						label='Password'
 						type='password'
 						required
 						onChange={onChangeHandler}
 						name='password'
 						value={password}
-						placeholder='Password*'
 					/>
-					<input
-						className='signup-container-form-phone'
+					<FormInput
+						label='Phone'
 						type='text'
 						required
 						onChange={onChangeHandler}
 						name='phone'
 						value={phone}
-						placeholder='Phone Number*'
 					/>
-					<input
-						className='signup-container-form-confPassword'
+					<FormInput
+						label='Confirm Password'
 						type='password'
 						required
 						onChange={onChangeHandler}
 						name='confirmPassword'
 						value={confirmPassword}
-						placeholder='Confirm Password*'
 					/>
 					<button className='signup-container-form-btn' type='submit'>
 						Submit
