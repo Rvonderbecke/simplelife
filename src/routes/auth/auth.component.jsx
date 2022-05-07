@@ -1,19 +1,61 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { ErrorBoundary } from '../../components/errorBoundry';
+import { signInAuthWithEmailAndPassword } from '../../utils/fireBase';
+import { Link, useNavigate } from 'react-router-dom';
+
+const defaultFields ={
+	userName: '',
+	password: ''
+};
 
 const AuthObject = () => {
+	const nav = useNavigate();
+	const [formFields, setFormFields] = useState(defaultFields);
+	
+	const { userName, password } = formFields;
+	const handleOnChange = (e) => {
+		try {
+			const { name, value } = e.target;
+			setFormFields({ ...formFields, [name]: value });
+		} catch (err) {
+			console.log(err.message)
+		}
+	};
+	const handleClickEvent = async (e) => {
+		e.preventDefault();
 
-
-	const handleClickEvent = () => {
-		
-	}
+		try {
+			await signInAuthWithEmailAndPassword(userName, password);
+			nav('/dashboard');
+		} catch (err) {
+			ErrorBoundary(err, err.message);
+		}
+	};
 	return (
-		<>
-			<input className="login-container-form-userName" type='text' placeholder='Username' />
-			<input className="login-container-form-password" type='text' placeholder='Password' />
-			<Link to='/resetpassword' className="forgotPassword">Forgot Password</Link>
-			<button type="button" className='login-container-right-btn2 btn btn-signIn' onClick={handleClickEvent}>Sign In</button>
-		</>
+		<form onSubmit={handleClickEvent}>
+			<input
+				className='login-container-form-userName'
+				type='email'
+				placeholder='Username'
+				name='userName'
+				value={userName}
+				onChange={handleOnChange}
+			/>
+			<input
+				className='login-container-form-password'
+				type='password'
+				placeholder='Password'
+				name='password'
+				value={password}
+				onChange={handleOnChange}
+			/>
+			<Link to='/resetpassword' className='forgotPassword'>
+				Forgot Password
+			</Link>
+			<button className='login-container-right-btn2 btn btn-signIn'>
+				Sign In
+			</button>
+		</form>
 	);
 };
 

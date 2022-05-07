@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../context/userContext';
 import {
 	createAuthUserWithEmailAndPassword,
 	createAuthUserDoc,
@@ -17,7 +16,6 @@ const defaultFromFields = {
 };
 
 const SignUpForm = () => {
-	const { setCurrentUser } = useContext(UserContext);
 	const [formFields, setFormFields] = useState(defaultFromFields);
 	const resetFormFields = () => {
 		setFormFields(defaultFromFields);
@@ -41,7 +39,6 @@ const SignUpForm = () => {
 		const { email, password } = formFields;
 		try {
 			const user = await createAuthUserWithEmailAndPassword(email, password);
-			setCurrentUser(user);
 			await createAuthUserDoc(user, formFields);
 			resetFormFields();
 			nav('/dashboard');
@@ -103,7 +100,12 @@ const SignUpForm = () => {
 						value={email}
 					/>
 
-					<FormInput label='Confirm Email' type='email' name='confEmail' value={confEmail} />
+					<FormInput
+						label='Confirm Email'
+						type='email'
+						name='confEmail'
+						value={confEmail}
+					/>
 					<FormInput
 						label='ZipCode'
 						type='text'

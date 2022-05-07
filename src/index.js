@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { UserProvider } from './context/userContext';
+import { BillProvider } from './context/bills.context';
 import { ErrorBoundary } from './components/errorBoundry';
 import './index.css';
 import App from './App';
@@ -13,7 +14,9 @@ root.render(
 		<ErrorBoundary>
 			<Router>
 				<UserProvider>
-					<App />
+					<BillProvider>
+						<App />
+					</BillProvider>
 				</UserProvider>
 			</Router>
 		</ErrorBoundary>

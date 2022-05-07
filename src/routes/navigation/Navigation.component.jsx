@@ -4,7 +4,7 @@ import { UserContext } from '../../context/userContext';
 import { logUserOut } from '../../utils/fireBase';
 
 const Navigation = () => {
-	const { show, setShow, currentUser, setCurrentUser } =
+	const { show, setShow, currentUser} =
 		useContext(UserContext);
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -16,7 +16,6 @@ const Navigation = () => {
 		const des = target.innerText.toLowerCase();
 		if (des === 'logout') {
 			logUserOut();
-			setCurrentUser(false);
 			return navigate('/login');
 		}
 		navigate(`/${des}`);

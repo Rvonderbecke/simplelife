@@ -1,19 +1,13 @@
-import { useContext } from 'react';
-import { UserContext } from '../../context/userContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithGoogle, createAuthUserDoc } from '../../utils/fireBase';
+import { signInWithGoogle } from '../../utils/fireBase';
 import AuthObject from '../auth/auth.component';
 
 const Login = () => {
-	const { setCurrentUser, setShow, show, currentUser } = useContext(UserContext);
 	const nav = useNavigate();
 
 	
 	const handleGoogleButton = async () => {
-		const { user } = await signInWithGoogle();
-		console.log(user)
-		await createAuthUserDoc(user);
-		await setCurrentUser(user);
+		await signInWithGoogle();
 		nav('/dashboard');
 	};
 	return (
