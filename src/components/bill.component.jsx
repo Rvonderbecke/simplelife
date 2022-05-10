@@ -1,5 +1,4 @@
 import React from 'react'
-import BillCard from '../components/bill-card.component'
 
 const Bill = ({ bill }) => {
     const { name, company, simplePayAmount } = bill;

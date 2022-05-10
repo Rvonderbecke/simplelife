@@ -65,7 +65,6 @@ export const addCollectionAndDocuments = async (
 export const createAuthUserDoc = async (userAuth, additionalInfo) => {
 	if (!userAuth) return console.log('err');
 	const userDocRef = doc(db, 'users', userAuth.uid);
-
 	const userSnapShot = getDoc(userDocRef);
 	if (userSnapShot) {
 		//set and create a document
@@ -186,12 +185,20 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 	return user;
 };
 
+// export const getUserData = (uid) => {
+// 	db.ref('users/' + uid).once("value", snap => {
+// 		console.log(snap.val())
+// 	})
+// }
+
 export const signInAuthWithEmailAndPassword = async (email, password) => {
 	if (!email || !password) return;
 	return await signInWithEmailAndPassword(auth, email, password);
 };
-export const onAuthStateChangedListener = (callback) =>
+export const onAuthStateChangedListener = (callback) => {
 	onAuthStateChanged(auth, callback);
+	
+}
 
 //get data from firestore
 export const getBillsAndDocuments = async () => {
@@ -205,3 +212,8 @@ export const getBillsAndDocuments = async () => {
 	}, {});
 	return billMap;
 };
+//senduserupdates 
+
+export const addNewUserBill =async () => {
+	
+}

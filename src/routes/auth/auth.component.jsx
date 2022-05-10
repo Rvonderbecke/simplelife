@@ -34,7 +34,7 @@ const AuthObject = () => {
 	return (
 		<form onSubmit={handleClickEvent}>
 			<input
-				className='login-container-form-userName'
+				className='_userName'
 				type='email'
 				placeholder='Username'
 				name='userName'
@@ -42,7 +42,7 @@ const AuthObject = () => {
 				onChange={handleOnChange}
 			/>
 			<input
-				className='login-container-form-password'
+				className='_password'
 				type='password'
 				placeholder='Password'
 				name='password'
@@ -52,7 +52,7 @@ const AuthObject = () => {
 			<Link to='/resetpassword' className='forgotPassword'>
 				Forgot Password
 			</Link>
-			<button className='login-container-right-btn2 btn btn-signIn'>
+			<button className='btn btn-signIn'>
 				Sign In
 			</button>
 		</form>

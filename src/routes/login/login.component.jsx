@@ -5,7 +5,6 @@ import AuthObject from '../auth/auth.component';
 const Login = () => {
 	const nav = useNavigate();
 
-	
 	const handleGoogleButton = async () => {
 		await signInWithGoogle();
 		nav('/dashboard');
@@ -20,21 +19,20 @@ const Login = () => {
 				<p className='login-container-left-p'>Life doesn't have to be hard </p>
 			</div>
 			<div className='login-container-right'>
-				<h1 className='login-container-right-h1'>Simple Life</h1>
-				<p className='login-container-right-p1'> Welcome to the Simple Life</p>
-				<div className='login-container-form'>
+				<h1>Simple Life</h1>
+				<p> Welcome to the Simple Life</p>
+				<div className='login-form-container'>
 					<AuthObject />
 				</div>
-				<div className='lineBreak'>
-					<span className='or'>or</span>
-				</div>
-				<button
-					className='login-container-right-btn btn btn-google'
-					onClick={handleGoogleButton}>
+
+				<button className='btn btn-google' onClick={handleGoogleButton}>
 					Sign in with Google
 				</button>
-				<p className='login-container-right-p2'>
-					Not a Member? <Link to='/register' className='login-container-register'>Register</Link>
+				<p className='p2'>
+					Not a Member?{' '}
+					<Link to='/register' className='_register'>
+						Register
+					</Link>
 				</p>
 			</div>
 		</div>

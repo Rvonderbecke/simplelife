@@ -6,7 +6,7 @@
 // <div className='login-container-right'>
 //     <h1 className='login-container-right-h1'>Simple Life</h1>
 //     <p className='login-container-right-p1'> Welcome to the Simple Life</p>
-   
+
 //     <input className="login-container-form-userName" type='text' placeholder='' />
 //     <input className="login-container-form-password" type='text' placeholder='' />
 //     <div className='lineBreak'>
@@ -16,125 +16,135 @@
 //     <button className='login-container-right-btn btn btn-google'>Sign in with Google</button>
 //     <p "login-container-right-p2"> Not a Member? <Link to='register'>Register</Link>
 
-
 .login-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(9,6.3rem);
-  
-    
-
-    &-left {
-        background-color: $color-primary-dark;
-        grid-column: 1;
-        grid-row: 1/10;
-        border-radius: 2rem 0 0  2rem;
-        &-img {
-            margin: 10rem 0 0 12rem;
-            width:55%;
-            height:55%;
-
-        }
+	display: grid;
+	grid-template-areas: 'logo form';
+	text-align: center;
 
 
-//Life doesn't have to be so hard//
-        &-p{
-            font-family: $font-paragraph;
-            text-align: center;
-            color: $color-grey-light;
-        } 
-    }
-    &-register {
-        color: $color-primary-light;
-        text-decoration: none;
-    }
+	&-left {
+		grid-area: logo;
+		background-color: $color-primary-dark;
+        
+	
+		border-radius: 2rem 0 0 2rem;
+		&-img {
+		
+			width: 50%;
+			height: 50%;
+		}
 
-    &-right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+		//Life doesn't have to be so hard//
+		&-p {
+			font-family: $font-paragraph;
+			text-align: center;
+			color: $color-grey-light;
+		}
+	}
 
-        &-h1 {
-            font-family: $font-heading;
-            margin-top: 5rem;
-            text-transform: uppercase;
-        }
+	&-right {
+        width: 100%;
+		grid-area: form;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		
+        //google button//
+		button {
+			background-color: $color-secondary-blue;
+            margin-bottom: 5rem;
+		}
 
-// Welcome to the Simple Life//
-     &-p1 {
-            font-family: $font-paragraph;
+		h1 {
+			font-family: $font-heading;
+			margin-top: 5rem;
+			text-transform: uppercase;
+		}
+
+		// Welcome to the Simple Life//
+		p {
+			font-family: $font-paragraph;
+            margin-bottom: 6rem;
+		}
+
+		//Not a Member? Register//
+		.p2 {
+			font-family: $font-paragraph;
+
+			._register {
+				color: $color-primary-dark;
+				text-decoration: none;
+			}
+		}
+
+		
+	}
+
+	.login-form-container {
+       width: 100%;
+       
+        //signin button//
+		.btn {
+			background-color: $color-primary-btn;
+            margin: 5rem;
+
+		}
+
+		._userName {
+			// margin: 5rem 0 5rem 0;
+			border-width: 0 0 0.1rem 0;
+			border-color: $color-primary-light;
+			// width: 38rem;
+			font-size: 1rem;
+			padding-bottom: 2rem;
+            min-width: 60%;
             margin-bottom: 3rem;
-            
-        }
 
-//Not a Member? Register//
-    &-p2 {
-        font-family: $font-paragraph;
-        transform: translateY(15rem);
+			
+		}
+		._password {
+			border-width: 0 0 0.1rem 0;
+			border-color: $color-primary-light;
+			// width: 38rem;
+			font-size: 1rem;
+			padding-bottom: 2rem;
+            min-width: 60%;
+		}
+
+	}
+	//end login form stuff
+	// .lineBreak {
+	// 	border-bottom: 0.15rem solid $color-grey-medium;
+	// 	width: 38rem;
+	// 	z-index: 1;
+	// 	bottom: 15rem;
+	// }
+	.forgotPassword {
+		display: flex;
+		justify-content: center;
+		color: $color-primary-light;
+		text-decoration: none;
+		
+	}
+}
+@media (max-width: 1200px) {
+	.login-container-left {
+		display: none;
+	}
+	.login-container-right {
+		align-items: center;
+		text-align: center;
+	}
+	.login-form-container {
+		display: flex;
+		flex-direction: column;
+	}
+}
+@media (max-width:700px){
+    .login-form-container{
+        
        
     }
-
-    &-btn {
-        transform: translateY(14rem);
+    .login-container{
     }
-
-    &-btn2 {
-        transform: translateY(5rem);
-        }
-    }
-
-.login-container-form {
-    display: flex;
-    flex-direction: column;
-    font-family: $font-paragraph;
-    
-
-    &-userName {
-        margin: 5rem 0 5rem 0;
-        border-width: 0 0 .1rem 0;
-        border-color: $color-primary-light;
-        width: 38rem;
-        font-size: 1rem;
-        padding-bottom: 2rem;
-        
-        
-        // border-bottom: .25rem solid $color-primary-light;
-    }
-    &-password {
-        border-width: 0 0 .1rem 0;
-        border-color: $color-primary-light;
-        width: 38rem;
-        font-size: 1rem;
-        padding-bottom: 2rem;
-    }
-
-}
-.or {
-   
-    color:$color-grey-medium;
-    position: absolute;
-    background-color: white;
-    font-family: $font-paragraph;
-    padding: 0 2rem;
-    z-index: 2;
-    transform: translateX(17rem);
-    
-} 
-}
-.lineBreak {
-    border-bottom: .15rem solid $color-grey-medium;
-    width:38rem;
-    position: absolute;
-    z-index: 1;
-    bottom: 15rem;
-
-
-}
-.forgotPassword {
-    display: flex;
-    justify-content: flex-end;
-    color: $color-primary-light;
-    text-decoration: none;
-   
-    
 }
