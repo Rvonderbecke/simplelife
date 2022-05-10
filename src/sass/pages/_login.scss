@@ -20,16 +20,18 @@
 	display: grid;
 	grid-template-areas: 'logo form';
 	text-align: center;
-
+	
 
 	&-left {
 		grid-area: logo;
 		background-color: $color-primary-dark;
-        
-	
-		border-radius: 2rem 0 0 2rem;
-		&-img {
+        border-radius: 2rem 0 0 2rem;
+		width: 80%;
 		
+
+		&-img {
+			// place-content: center;
+			margin-top: 5rem;
 			width: 50%;
 			height: 50%;
 		}
@@ -43,7 +45,7 @@
 	}
 
 	&-right {
-        width: 100%;
+       
 		grid-area: form;
 		display: flex;
 		flex-direction: column;
